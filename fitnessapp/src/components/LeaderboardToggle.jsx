@@ -9,6 +9,8 @@ export default function LeaderboardToggle() {
     { name: 'Alice', score: 120 },
     { name: 'Bob', score: 110 },
     { name: 'Charlie', score: 95 },
+    { name: 'Diana', score: 85 },
+    { name: 'Ethan', score: 80 },
   ];
 
   const handleClick = () => setIsVisible(!isVisible);
