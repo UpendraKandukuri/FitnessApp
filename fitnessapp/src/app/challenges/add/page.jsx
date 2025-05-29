@@ -1,57 +1,99 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { createChallenge } from '../actions';
+import { useState } from 'react';
 
 export default function AddChallengePage() {
+  const router = useRouter();
+  const [submitting, setSubmitting] = useState(false);
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    setSubmitting(true);
+
+    const formData = new FormData(event.target);
+    try {
+      await createChallenge(formData);
+      router.push('/challenges'); 
+    } catch (error) {
+      console.error('Failed to create challenge', error);
+      setSubmitting(false);
+    }
+  }
+
   return (
-    <div className='flex items-center justify-center m-5 flex-col gap-4'>
-      <h1 className="text-2xl font-bold mb-4">Add New Challenge</h1>
-      <form action={createChallenge} className="p-6 flex flex-col gap-3  bg-white shadow-md rounded-md">
-      <input
-        type="text"
-        name="title"
-        placeholder="Challenge Title"
-        required
-        className="border border-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-300 rounded-md p-2 "
-      />
-
-      <textarea
-        name="description"
-        placeholder="Challenge Description"
-        required
-      className="border border-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-300 rounded-md p-2 "
-      />
-
-      <input
-        type="number"
-        name="durationDays"
-        placeholder="Duration in Days"
-        required
-        className="border border-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-300 rounded-md p-2 "
-      />
-
-      <input
-        type="text"
-        name="type"
-        placeholder="Type (e.g., strength, cardio)"
-        required
-        className="border border-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-300 rounded-md p-2 "
-      />
-
-      <textarea
-        name="rules"
-        placeholder="Rules (Markdown or plain text)"
-        required
-        className="border border-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-300 rounded-md p-2 "
-      />
-
-      <button
-        type="submit"
-        className="bg-blue-600 w-fit text-white px-4 py-2 rounded hover:bg-blue-700"
+    <div className="min-h-screen bg-black flex items-center justify-center p-6">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-gray-900 p-8 rounded-xl shadow-xl w-full max-w-lg text-white flex flex-col gap-6"
       >
-        Create Challenge
-      </button>
-    </form>
+        <a
+          href="/challenges"
+          className="text-blue-400 hover:text-blue-600 mb-4 inline-block"
+        >
+          ← Back to Challenges
+        </a>
+
+        <h1 className="text-4xl font-extrabold mb-4 border-b border-gray-700 pb-3">
+          Add New Challenge
+        </h1>
+
+        <input
+          type="text"
+          name="title"
+          placeholder="Challenge Title"
+          required
+          className="bg-gray-800 border border-gray-700 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          disabled={submitting}
+        />
+
+        <textarea
+          name="description"
+          placeholder="Challenge Description"
+          required
+          rows={4}
+          className="bg-gray-800 border border-gray-700 rounded-md p-3 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+          disabled={submitting}
+        />
+
+        <input
+          type="number"
+          name="durationDays"
+          placeholder="Duration in Days"
+          required
+          className="bg-gray-800 border border-gray-700 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          disabled={submitting}
+        />
+
+        <input
+          type="text"
+          name="type"
+          placeholder="Type (e.g., strength, cardio)"
+          required
+          className="bg-gray-800 border border-gray-700 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          disabled={submitting}
+        />
+
+        <textarea
+          name="rules"
+          placeholder="Rules (Markdown or plain text)"
+          required
+          rows={3}
+          className="bg-gray-800 border border-gray-700 rounded-md p-3 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+          disabled={submitting}
+        />
+
+        <button
+          type="submit"
+          disabled={submitting}
+          className={`bg-blue-600 hover:bg-blue-700 transition rounded-md py-3 font-semibold text-white ${
+            submitting ? 'opacity-60 cursor-not-allowed' : ''
+          }`}
+        >
+          {submitting ? 'Creating...' : 'Create Challenge'}
+        </button>
+      </form>
     </div>
   );
 }
