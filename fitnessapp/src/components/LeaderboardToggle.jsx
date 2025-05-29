@@ -20,13 +20,13 @@ export default function LeaderboardToggle() {
     <div className="p-6 text-white min-h-[300px] rounded-lg max-w-xl mx-auto">
       <button
         onClick={handleClick}
-        className="bg-white text-black font-semibold px-6 py-3 rounded-full shadow hover:scale-105 transition-transform duration-300"
+        className="bg-white text-gray-800 font-semibold px-6 py-3 rounded-full shadow hover:scale-105 transition-transform duration-300"
       >
         {isVisible ? 'Hide Leaderboard' : 'Show Leaderboard'}
       </button>
 
       {isVisible && (
-        <div className="mt-8 bg-black border border-white/20 rounded-xl p-6 shadow-xl space-y-6">
+        <div className="mt-8 bg-gray-800 border border-white/20 rounded-xl p-6 shadow-xl space-y-6">
           <h2 className="text-3xl font-bold text-center border-b border-white/10 pb-3">
             🏆 Leaderboard
           </h2>
