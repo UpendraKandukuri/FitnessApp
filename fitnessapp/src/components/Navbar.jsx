@@ -29,7 +29,7 @@ export default function Navbar() {
         {/* Logo */}
         <Link
           href="/"
-          className="text-2xl font-extrabold tracking-wide hover:text-blue-400 transition-colors duration-300"
+          className="text-2xl font-extrabold tracking-wide hover:text-blue-500 transition-colors duration-300"
         >
           FitnessApp
         </Link>
@@ -52,7 +52,7 @@ export default function Navbar() {
               <Link
                 href="/challenges"
                 className="relative inline-block text-lg font-semibold text-white px-6 py-2 rounded-full overflow-hidden group cursor-pointer
-                  before:absolute before:inset-0 before:bg-gradient-to-r before:from-blue-500 before:to-purple-600 
+                  before:absolute before:inset-0 before:bg-gradient-to-r before:from-blue-400 before:to-purple-600 
                   before:opacity-0 before:transition-opacity before:duration-300 hover:before:opacity-100
                   active:scale-95 shadow-md transition-transform duration-300"
               >
