@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
-import { firebaseApp } from "@/lib/firestore";
+import { db } from "@/lib/firestore";
 
 export async function GET(request, { params }) {
   try {
@@ -9,7 +9,7 @@ export async function GET(request, { params }) {
       return NextResponse.json({ error: "Challenge ID is required" }, { status: 400 });
     }
 
-    const db = getFirestore(firebaseApp);
+    const db = getFirestore(db);
     const challengeDocRef = doc(db, "challenges", challengeId);
     const docSnap = await getDoc(challengeDocRef);
 

@@ -60,9 +60,9 @@ export const authOptions = {
     },
   },
   pages: {
-    signIn: "/auth/signin", // create this page next
+    signIn: "/auth/signin",
   },
-  secret: process.env.NEXTAUTH_SECRET,
+   secret: "secretkey",
 };
 
 const handler = NextAuth(authOptions);

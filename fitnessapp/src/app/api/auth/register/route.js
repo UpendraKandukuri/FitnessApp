@@ -44,22 +44,22 @@ export async function GET() {
   }
 }
 
-export async function GET(request, { params }) {
-  const { id } = params;
+// export async function GET(request, { params }) {
+//   const { id } = params;
 
-  try {
-    const userRef = doc(db, "users", id);
-    const userSnap = await getDoc(userRef);
+//   try {
+//     const userRef = doc(db, "users", id);
+//     const userSnap = await getDoc(userRef);
 
-    if (!userSnap.exists()) {
-      return new Response(JSON.stringify({ error: "User not found" }), { status: 404 });
-    }
+//     if (!userSnap.exists()) {
+//       return new Response(JSON.stringify({ error: "User not found" }), { status: 404 });
+//     }
 
-    const userData = { id: userSnap.id, ...userSnap.data() };
-    return new Response(JSON.stringify(userData), { status: 200 });
-  } catch (error) {
-    return new Response(JSON.stringify({ error: "Failed to fetch user" }), { status: 500 });
-  }
-}
+//     const userData = { id: userSnap.id, ...userSnap.data() };
+//     return new Response(JSON.stringify(userData), { status: 200 });
+//   } catch (error) {
+//     return new Response(JSON.stringify({ error: "Failed to fetch user" }), { status: 500 });
+//   }
+// }
 
 
